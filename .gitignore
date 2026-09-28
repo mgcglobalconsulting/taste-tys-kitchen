@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor
+.obsidian/
+.vscode/
+
+# Assets — store in cloud (Google Drive, Dropbox, etc.), not git
+taste-tys-assets/
