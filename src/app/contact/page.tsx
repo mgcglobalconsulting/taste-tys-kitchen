@@ -2,6 +2,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { ContactForm } from "@/components/site/contact-form";
 import { LocationMap } from "@/components/site/location-map";
 import { PageHero } from "@/components/site/page-hero";
 import { Reveal } from "@/components/site/reveal";
@@ -78,6 +79,23 @@ export default function ContactPage() {
             </div>
           );
         })}
+      </section>
+
+      <section aria-labelledby="message-heading" className="container-site grid gap-10 pb-20 lg:grid-cols-[1fr_1.4fr]">
+        <Reveal>
+          <p className="eyebrow mb-3">Send a message</p>
+          <h2 id="message-heading" className="text-4xl sm:text-5xl">
+            Questions? Ask away.
+          </h2>
+          <p className="mt-4 text-lg text-smoke">
+            For general questions, send us a note here. Planning an event? A{" "}
+            <Link href={primaryCta.href} className="font-bold text-pinot underline-offset-4 hover:underline">
+              consultation request
+            </Link>{" "}
+            gets you started fastest.
+          </p>
+        </Reveal>
+        <ContactForm />
       </section>
 
       <section aria-labelledby="map-heading" className="container-site pb-20">

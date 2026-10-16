@@ -1,6 +1,5 @@
 -- Consultation requests from the public booking form (/book).
--- Not applied anywhere yet: the Supabase project is INACTIVE and no backend
--- has been switched on. Apply with `supabase db push` once approved.
+-- Anon may insert pending requests only; see policy below.
 
 create type public.consultation_status as enum ('pending', 'approved', 'quoted', 'deposit_paid', 'closed');
 
