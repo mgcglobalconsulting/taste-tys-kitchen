@@ -9,3 +9,31 @@
 
 # Assets — store in cloud (Google Drive, Dropbox, etc.), not git
 taste-tys-assets/
+
+# Reference source material — local input for build decisions, never committed.
+# Distilled into docs/BRAND.md and docs/CONTENT.md; read those first.
+*.pdf
+!public/menus/*.pdf
+Vegan meal plan.png
+What-is-a-Standard-Operating-Procedure-SOP.png
+taste-tys-kitchen-inspiration-only/
+
+# Next.js
+node_modules/
+.next/
+out/
+.env
+.env*.local
+next-env.d.ts
+
+# Source photo originals — several are over 1MB (HEIC / oversized PNG). Web-ready
+# copies live in src/assets/photos; see docs/IMAGES.md.
+taste-of-ty-site-pics/
+
+# Reference site HTML (2MB scrape of ridgewells.com) — local input only.
+regis-site-example-html.txt
+
+# HyperFrames working files and renders (the site uses public/media/ outputs)
+motion/**/.hyperframes/
+motion/**/renders/
+motion/**/node_modules/

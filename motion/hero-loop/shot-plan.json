@@ -1,0 +1,23 @@
+{
+  "category": "kinetic-type",
+  "duration_s": 12,
+  "fps": 30,
+  "canvas": { "w": 1920, "h": 1080, "aspect": "16:9" },
+  "style": "Light, clean editorial. Crème ground, ink type, one red accent word and underline, gold hairline ornament. Food photography carries the colour.",
+  "palette": ["#FBF8F3", "#F3ECE2", "#141110", "#57504B", "#B01010", "#CCA86E"],
+  "font": "Fraunces (display) + Lato (body)",
+  "beats": [0.4, 1.0, 2.3, 3.0, 4.6, 6.2, 7.8, 9.2, 11.2],
+  "export": "mp4",
+  "asset_needs": [],
+  "block": null,
+  "customize": {},
+  "content": {
+    "scenes": [
+      { "id": "hook", "start": 0, "end": 3, "text": "Great food with purpose.", "emphasis_words": ["purpose."], "emotion": "warm, confident", "motion": "masked word rise + red underline sweep; hero photo wipes in", "beats": [1.0, 2.3] },
+      { "id": "build", "start": 3, "end": 9.2, "text": "Catering / Meal Prep / Daily Meals / Cooking Classes / Meal Plans", "emphasis_words": [], "emotion": "lively", "motion": "rolling word slot synced to photo wipes (lamb chops, jerk chicken, salmon, shrimp cocktail)", "beats": [3.0, 4.6, 6.2, 7.8] },
+      { "id": "punch", "start": 9.2, "end": 11.2, "text": "Now booking. Book a Consultation.", "emphasis_words": ["Book a Consultation"], "emotion": "inviting", "motion": "logo and red CTA pill settle; private setup photo", "beats": [9.2] },
+      { "id": "resolve", "start": 11.2, "end": 12, "text": "", "emphasis_words": [], "emotion": "calm", "motion": "fade to crème so the loop restarts cleanly", "beats": [11.2] }
+    ]
+  },
+  "brief": "A 12s seamless loop for the website: a crème page where a hero dinner photo wipes in beside a kinetic serif headline, Ty's dishes wipe through the photo frame as a rolling word names each service, and it settles on the logo with a red 'Book a Consultation' pill before fading back to crème. One motif: the clip-path wipe."
+}

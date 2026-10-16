@@ -1,0 +1,22 @@
+/*
+ * Design tokens — mirrors docs/BRAND.md "New theme" (Crème & Pinot, 2026-10-16).
+ * Change both together. Contrast ratios are recorded in that doc.
+ */
+@theme {
+  --color-creme: #fbf8f3;
+  --color-linen: #f3ece2;
+  --color-line: #e6ded3;
+  --color-ink: #141110;
+  --color-smoke: #57504b;
+  --color-pinot: #b01010;
+  --color-oxblood: #600808;
+  --color-gold: #cca86e;
+
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-lato), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-control: 2px;
+  --radius-media: 4px;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}

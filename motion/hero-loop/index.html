@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Lato:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      /* Palette mirrors docs/BRAND.md "Crème & Pinot" */
+      :root {
+        --creme: #fbf8f3;
+        --linen: #f3ece2;
+        --ink: #141110;
+        --smoke: #57504b;
+        --pinot: #b01010;
+        --gold: #cca86e;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--creme);
+      }
+      #stage {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--creme);
+        font-family: Lato, ui-sans-serif, system-ui, sans-serif;
+        color: var(--ink);
+      }
+      #scene {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1920px;
+        height: 1080px;
+      }
+      #layout {
+        position: relative;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        padding: 110px 120px;
+        gap: 96px;
+        align-items: center;
+      }
+
+      /* Left: copy column */
+      #copy {
+        position: relative;
+        flex: 0 0 720px;
+        height: 100%;
+      }
+      .panel {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 28px;
+      }
+      .eyebrow {
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--pinot);
+      }
+      .rule {
+        width: 140px;
+        height: 2px;
+        background: var(--gold);
+        transform-origin: left center;
+      }
+      h1 {
+        font-family: Fraunces, Georgia, serif;
+        font-weight: 500;
+        font-size: 132px;
+        line-height: 1.02;
+        letter-spacing: -0.02em;
+      }
+      .line {
+        display: block;
+        overflow: hidden;
+        padding-bottom: 12px;
+      }
+      .word {
+        display: inline-block;
+      }
+      .accent {
+        position: relative;
+        font-style: italic;
+        color: var(--pinot);
+      }
+      #underline {
+        position: absolute;
+        left: 4px;
+        right: 8px;
+        bottom: 4px;
+        height: 5px;
+        background: var(--pinot);
+        transform-origin: left center;
+      }
+      .serving {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        white-space: nowrap;
+        line-height: 96px;
+        font-family: Fraunces, Georgia, serif;
+        font-size: 50px;
+        color: var(--smoke);
+      }
+      .slot {
+        position: relative;
+        display: inline-block;
+        height: 96px;
+        width: 480px;
+        overflow: hidden;
+      }
+      .slot span {
+        position: absolute;
+        left: 0;
+        top: 0;
+        white-space: nowrap;
+        line-height: 96px;
+        font-style: italic;
+        color: var(--ink);
+      }
+
+      /* CTA panel */
+      #logo {
+        width: 520px;
+        height: auto;
+      }
+      .cta-line {
+        font-family: Fraunces, Georgia, serif;
+        font-size: 58px;
+        line-height: 1.1;
+      }
+      .cta-line em {
+        color: var(--pinot);
+      }
+      #pill {
+        align-self: flex-start;
+        display: inline-flex;
+        align-items: center;
+        gap: 18px;
+        padding: 30px 48px;
+        border-radius: 3px;
+        background: var(--pinot);
+        color: var(--creme);
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+      .contact {
+        font-size: 26px;
+        letter-spacing: 0.08em;
+        color: var(--smoke);
+      }
+
+      /* Right: photo frame */
+      #frame {
+        position: relative;
+        flex: 1;
+        height: 100%;
+        border-radius: 6px;
+        overflow: hidden;
+        background: var(--linen);
+      }
+      .photo {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+      .photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .caption {
+        position: absolute;
+        left: 36px;
+        bottom: 36px;
+        padding: 14px 24px;
+        border-radius: 3px;
+        background: rgba(20, 17, 16, 0.82);
+        color: var(--creme);
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      #veil {
+        position: absolute;
+        inset: 0;
+        background: var(--creme);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="stage"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="12"
+      data-fps="30"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div id="scene" class="clip" data-start="0" data-duration="12" data-track-index="0">
+        <div id="layout">
+          <div id="copy">
+            <!-- Panel A: headline + rolling services -->
+            <div id="panel-a" class="panel">
+              <div class="rule" id="rule"></div>
+              <p class="eyebrow" id="eyebrow">A Global Fusion Catering Experience</p>
+              <h1>
+                <span class="line" data-layout-allow-overflow="true"><span class="word" id="w1">Great&nbsp;food</span></span>
+                <span class="line" data-layout-allow-overflow="true"
+                  ><span class="word" id="w2">with&nbsp;</span
+                  ><span class="word accent" id="w3">purpose.<span id="underline"></span></span
+                ></span>
+              </h1>
+              <div class="serving" id="serving">
+                <span>Now serving</span>
+                <span class="slot" data-layout-allow-overflow="true">
+                  <span id="s1">Catering</span>
+                  <span id="s2">Meal Prep</span>
+                  <span id="s3">Daily Meals</span>
+                  <span id="s4">Cooking Classes</span>
+                  <span id="s5">Meal Plans</span>
+                </span>
+              </div>
+            </div>
+            <!-- Panel B: booking end card -->
+            <div id="panel-b" class="panel">
+              <img id="logo" src="assets/logo-red.png" alt="Taste of Ty's Kitchen" />
+              <p class="cta-line" id="cta-line">Now booking.<br /><em>Secure your date.</em></p>
+              <div id="pill">Book a Consultation</div>
+              <p class="contact" id="contact">443.226.3279 · tyskitchen.org</p>
+            </div>
+          </div>
+
+          <div id="frame">
+            <div class="photo" id="p1"><img src="assets/fine-dining.jpg" alt="" /></div>
+            <div class="photo" id="p2">
+              <img src="assets/lamb-chops.jpg" alt="" /><span class="caption">Lamb Chops</span>
+            </div>
+            <div class="photo" id="p3">
+              <img src="assets/jerk-chicken.jpg" alt="" /><span class="caption">Caribbean Jerk Chicken</span>
+            </div>
+            <div class="photo" id="p4">
+              <img src="assets/salmon.jpg" alt="" /><span class="caption">Pineapple Habanero Salmon</span>
+            </div>
+            <div class="photo" id="p5">
+              <img src="assets/shrimp-cocktail.jpg" alt="" /><span class="caption">Shrimp Cocktail</span>
+            </div>
+            <div class="photo" id="p6"><img src="assets/setup-private.jpg" alt="" /></div>
+          </div>
+        </div>
+        <!-- Fades the whole frame back to crème so the loop restarts cleanly -->
+        <div id="veil"></div>
+      </div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      // Opening: crème veil lifts.
+      tl.fromTo("#veil", { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.5, ease: "sine.out" }, 0);
+
+      // Ornament + eyebrow.
+      tl.fromTo("#rule", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "power3.out" }, 0.2);
+      tl.fromTo("#eyebrow", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0.35);
+
+      // Hero photo wipes in from the right, then drifts.
+      tl.fromTo(
+        "#p1",
+        { clipPath: "inset(0% 0% 0% 100%)" },
+        { clipPath: "inset(0% 0% 0% 0%)", duration: 1.1, ease: "expo.inOut" },
+        0.3,
+      );
+      tl.fromTo("#p1 img", { scale: 1.16 }, { scale: 1.0, duration: 3.4, ease: "sine.out" }, 0.3);
+
+      // Headline: masked word rise.
+      tl.fromTo("#w1", { yPercent: 110 }, { yPercent: 0, duration: 0.8, ease: "power4.out" }, 0.9);
+      tl.fromTo("#w2", { yPercent: 110 }, { yPercent: 0, duration: 0.8, ease: "power4.out" }, 1.15);
+      tl.fromTo("#w3", { yPercent: 110 }, { yPercent: 0, duration: 0.8, ease: "power4.out" }, 1.35);
+      tl.fromTo("#underline", { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power3.inOut" }, 2.2);
+
+      // "Now serving" row.
+      tl.fromTo("#serving", { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.6, ease: "power2.out" }, 2.6);
+
+      // Rolling service slot + dish wipes, one beat per dish.
+      const slots = ["#s1", "#s2", "#s3", "#s4", "#s5"];
+      gsap.set(slots.slice(1), { yPercent: 110 });
+      const beats = [3.0, 4.6, 6.2, 7.8];
+      const dishes = ["#p2", "#p3", "#p4", "#p5"];
+      beats.forEach((t, i) => {
+        tl.fromTo(
+          slots[i],
+          { yPercent: 0 },
+          { yPercent: -110, duration: 0.55, ease: "power3.inOut", immediateRender: false },
+          t + 0.05,
+        );
+        tl.fromTo(
+          slots[i + 1],
+          { yPercent: 110 },
+          { yPercent: 0, duration: 0.55, ease: "power3.inOut", immediateRender: false },
+          t + 0.05,
+        );
+        tl.fromTo(
+          dishes[i],
+          { clipPath: "inset(100% 0% 0% 0%)" },
+          { clipPath: "inset(0% 0% 0% 0%)", duration: 0.9, ease: "expo.inOut" },
+          t,
+        );
+        tl.fromTo(dishes[i] + " img", { scale: 1.14 }, { scale: 1.02, duration: 2.2, ease: "sine.out" }, t);
+        tl.fromTo(
+          dishes[i] + " .caption",
+          { autoAlpha: 0, y: 12 },
+          { autoAlpha: 1, y: 0, duration: 0.45, ease: "power2.out" },
+          t + 0.55,
+        );
+      });
+
+      // Swap to the booking card.
+      tl.fromTo("#panel-a", { autoAlpha: 1, y: 0 }, { autoAlpha: 0, y: -24, duration: 0.5, ease: "power2.in" }, 9.1);
+      tl.fromTo(
+        "#p6",
+        { clipPath: "inset(0% 0% 0% 100%)" },
+        { clipPath: "inset(0% 0% 0% 0%)", duration: 1.0, ease: "expo.inOut" },
+        9.2,
+      );
+      tl.fromTo("#p6 img", { scale: 1.12 }, { scale: 1.02, duration: 2.6, ease: "sine.out" }, 9.2);
+      tl.fromTo("#logo", { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.7, ease: "power3.out" }, 9.5);
+      tl.fromTo("#cta-line", { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.7, ease: "power3.out" }, 9.7);
+      tl.fromTo("#pill", { autoAlpha: 0, scale: 0.92 }, { autoAlpha: 1, scale: 1, duration: 0.6, ease: "back.out(1.6)" }, 9.95);
+      tl.fromTo("#contact", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5, ease: "sine.out" }, 10.2);
+      tl.fromTo("#pill", { scale: 1 }, { scale: 1.04, duration: 0.35, ease: "sine.inOut", yoyo: true, repeat: 1, immediateRender: false }, 10.6);
+
+      // Resolve: fade back to crème for a seamless loop.
+      tl.fromTo("#veil", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.7, ease: "sine.inOut", immediateRender: false }, 11.3);
+
+      // Hold panel B hidden until its entrance.
+      gsap.set(["#logo", "#cta-line", "#pill", "#contact"], { autoAlpha: 0 });
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

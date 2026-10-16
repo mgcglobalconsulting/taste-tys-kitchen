@@ -1,0 +1,367 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: var(--color-creme);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--color-pinot);
+    color: var(--color-creme);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-pinot);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-pinot);
+  }
+
+  .container-site {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .container-site {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-site {
+      padding-inline: 2.5rem;
+    }
+  }
+}
+
+/* Scroll reveal — see components/site/reveal.tsx */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 600ms var(--ease-out-soft),
+    transform 600ms var(--ease-out-soft);
+}
+
+.reveal[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes hero-drift {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.hero-drift {
+  animation: hero-drift 9s var(--ease-out-soft) both;
+}
+
+/* Hero slideshow: 4 slides × 6s, crossfade with a slow push-in. */
+@keyframes hero-cycle {
+  0% {
+    opacity: 0;
+    transform: scale(1.12);
+  }
+  6% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 1;
+  }
+  31% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+.hero-slide {
+  opacity: 0;
+  animation: hero-cycle 24s linear infinite;
+}
+
+.hero-slide:first-child {
+  opacity: 1;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 40s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .hero-drift,
+  .marquee-track,
+  .hero-slide {
+    animation: none;
+  }
+}
+
+/* ── Location map (components/site/location-map.tsx) ─────────────────── */
+
+/* Soft crème/grey basemap: desaturate OSM tiles and warm them slightly. */
+.tk-map .leaflet-tile-pane {
+  filter: grayscale(1) sepia(0.18) brightness(1.05) contrast(0.88);
+}
+
+.tk-map.leaflet-container {
+  background: var(--color-linen);
+  font-family: var(--font-sans);
+}
+
+.tk-map .leaflet-control-attribution {
+  background: rgb(251 248 243 / 0.85);
+  color: var(--color-smoke);
+  font-size: 11px;
+}
+
+.tk-map .leaflet-control-attribution a {
+  color: var(--color-ink);
+}
+
+.tk-map .leaflet-bar {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-control);
+  box-shadow: none;
+}
+
+.tk-map .leaflet-bar a {
+  background: var(--color-creme);
+  color: var(--color-ink);
+  border-bottom-color: var(--color-line);
+}
+
+.tk-map .leaflet-bar a:hover {
+  background: var(--color-linen);
+  color: var(--color-pinot);
+}
+
+/* Map pin: small red teardrop with a chef's-hat glyph */
+.tk-pin-root {
+  background: none;
+  border: 0;
+}
+
+.tk-pin {
+  position: relative;
+  display: block;
+  width: 34px;
+  height: 42px;
+  cursor: pointer;
+}
+
+.tk-pin-badge {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: var(--color-pinot);
+  border: 2px solid var(--color-creme);
+  color: var(--color-creme);
+  box-shadow: 0 6px 14px -6px rgb(20 17 16 / 0.6);
+  transition: background-color 200ms;
+}
+
+.tk-pin-badge svg {
+  transform: rotate(45deg);
+}
+
+.tk-pin:hover .tk-pin-badge,
+.leaflet-marker-icon:focus-visible .tk-pin-badge {
+  background: var(--color-oxblood);
+}
+
+.tk-pin-pulse {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 22px;
+  height: 8px;
+  margin-left: -11px;
+  border-radius: 50%;
+  background: rgb(176 16 16 / 0.3);
+  animation: tk-pulse 2.4s var(--ease-out-soft) infinite;
+}
+
+@keyframes tk-pulse {
+  0% {
+    transform: scale(0.4);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* Popup card */
+.tk-popup .leaflet-popup-content-wrapper {
+  border-radius: var(--radius-media);
+  background: var(--color-creme);
+  border: 1px solid var(--color-line);
+  box-shadow: 0 24px 48px -24px rgb(20 17 16 / 0.45);
+  padding: 0;
+}
+
+.tk-popup .leaflet-popup-content {
+  margin: 0;
+  width: auto !important;
+}
+
+.tk-popup .leaflet-popup-tip {
+  background: var(--color-creme);
+  border: 1px solid var(--color-line);
+  box-shadow: none;
+}
+
+.tk-popup a.leaflet-popup-close-button {
+  top: 10px;
+  right: 10px;
+  color: var(--color-smoke);
+  font-size: 20px;
+}
+
+.tk-card {
+  padding: 22px 22px 20px;
+  border-top: 3px solid var(--color-pinot);
+  border-radius: var(--radius-media);
+}
+
+.tk-card-eyebrow {
+  margin: 0 !important;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-pinot);
+}
+
+.tk-card-name {
+  margin: 6px 0 0 !important;
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1.15;
+  color: var(--color-ink);
+}
+
+.tk-card-address {
+  margin-top: 8px;
+  font-style: normal;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-smoke);
+}
+
+.tk-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.tk-card .tk-card-btn {
+  display: block;
+  padding: 11px 14px;
+  border: 1px solid var(--color-ink);
+  border-radius: var(--radius-control);
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-ink);
+  transition: background-color 200ms, color 200ms;
+}
+
+.tk-card .tk-card-btn:hover {
+  background: var(--color-ink);
+  color: var(--color-creme);
+}
+
+.tk-card .tk-card-btn--primary {
+  border-color: var(--color-pinot);
+  background: var(--color-pinot);
+  color: var(--color-creme);
+}
+
+.tk-card .tk-card-btn--primary:hover {
+  border-color: var(--color-oxblood);
+  background: var(--color-oxblood);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tk-pin-pulse {
+    animation: none;
+    opacity: 0.4;
+  }
+}
