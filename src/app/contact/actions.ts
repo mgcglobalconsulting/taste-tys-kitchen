@@ -1,6 +1,7 @@
 "use server";
 
 import { contactSchema, type ContactField, type ContactState } from "@/lib/contact";
+import { notifyOwner } from "@/lib/notify";
 import { getSupabase } from "@/lib/supabase";
 
 function text(formData: FormData, key: string): string {
@@ -52,6 +53,12 @@ export async function sendContactMessage(_previous: ContactState, formData: Form
       message: "Something went wrong sending your message. Please try again, or call or email us.",
     };
   }
+
+  await notifyOwner(
+    `New contact message from ${data.fullName}`,
+    { Name: data.fullName, Email: data.email, Phone: data.phone, Message: data.message },
+    data.email,
+  );
 
   return { status: "success", firstName: data.fullName.split(/\s+/)[0] ?? "" };
 }

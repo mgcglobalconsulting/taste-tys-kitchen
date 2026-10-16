@@ -1,6 +1,7 @@
 "use server";
 
 import { consultationSchema, type ConsultationField, type ConsultationState } from "@/lib/consultation";
+import { notifyOwner } from "@/lib/notify";
 import { getSupabase } from "@/lib/supabase";
 
 function text(formData: FormData, key: string): string {
@@ -69,6 +70,24 @@ export async function requestConsultation(
       message: "Something went wrong sending your request. Please try again, or call or email us.",
     };
   }
+
+  await notifyOwner(
+    `New consultation request from ${data.fullName}`,
+    {
+      Name: data.fullName,
+      Email: data.email,
+      Phone: data.phone,
+      Service: data.service,
+      "Event date": data.eventDate,
+      Guests: data.guestCount,
+      "Service style": data.serviceStyle,
+      "Consultation time": data.consultWindow,
+      "Dietary needs": data.dietaryTags,
+      "Add-ons": data.addOns,
+      Message: data.message,
+    },
+    data.email,
+  );
 
   return { status: "success", firstName: data.fullName.split(/\s+/)[0] ?? "" };
 }
