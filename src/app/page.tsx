@@ -8,6 +8,7 @@ import Link from "next/link";
 import { CtaBand } from "@/components/site/cta-band";
 import { FindUs } from "@/components/site/find-us";
 import { HeroSlideshow } from "@/components/site/hero-slideshow";
+import { ShineLogo } from "@/components/site/shine-logo";
 import { PromoVideo } from "@/components/site/promo-video";
 import { Reveal } from "@/components/site/reveal";
 import { SectionHeading } from "@/components/site/section-heading";
@@ -74,11 +75,9 @@ export default function HomePage() {
         <HeroSlideshow slides={heroSlides} />
         <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/45 to-ink/25" aria-hidden />
         <div className="container-site relative py-16 text-center text-creme sm:py-24">
-          <p className="text-xs font-bold uppercase tracking-[0.28em] text-gold sm:text-sm">
-            Elegant flavor · Vibrant vibe · Dietary friendly
-          </p>
-          <h1 className="mx-auto mt-6 max-w-4xl text-[2.9rem] leading-[1.02] text-creme sm:text-7xl xl:text-[5.5rem]">
-            Great food with <em className="text-creme">purpose.</em>
+          <ShineLogo className="w-56 sm:w-80 xl:w-[22rem]" />
+          <h1 className="mx-auto mt-6 max-w-4xl text-[2.4rem] leading-[1.05] text-creme sm:text-6xl">
+            Great food with <em className="text-gold">purpose.</em>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-creme/85 sm:text-xl">
             {site.name} is a full-service mobile catering company with over 5 years of experience

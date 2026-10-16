@@ -37,3 +37,4 @@ regis-site-example-html.txt
 motion/**/.hyperframes/
 motion/**/renders/
 motion/**/node_modules/
+.vercel

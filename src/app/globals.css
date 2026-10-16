@@ -129,6 +129,99 @@
   opacity: 1;
 }
 
+/* ── Shining gold logo (components/site/shine-logo.tsx) ─────────────── */
+.shine-logo {
+  animation: shine-in 1.4s var(--ease-out-soft) both;
+}
+
+/* Dark halo so the gold reads cleanly over any hero photo. */
+.shine-logo::before {
+  content: "";
+  position: absolute;
+  inset: -14%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(10 8 7 / 0.78), rgb(10 8 7 / 0.45) 60%, transparent);
+}
+
+.shine-logo-art {
+  filter: drop-shadow(0 0 18px rgb(204 168 110 / 0.35)) drop-shadow(0 10px 30px rgb(0 0 0 / 0.55));
+  animation: shine-glow 5s ease-in-out 1.4s infinite;
+}
+
+/* A bright band that sweeps across the artwork only, clipped by its own alpha. */
+.shine-logo-sweep {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 38%,
+    rgb(255 246 214 / 0) 42%,
+    rgb(255 246 214 / 0.95) 50%,
+    rgb(255 246 214 / 0) 58%,
+    transparent 62%
+  );
+  background-size: 250% 100%;
+  background-repeat: no-repeat;
+  mix-blend-mode: screen;
+  -webkit-mask: url("/brand/totk-logo-gold.png") center / contain no-repeat;
+  mask: url("/brand/totk-logo-gold.png") center / contain no-repeat;
+  animation: shine-sweep 4.5s cubic-bezier(0.45, 0, 0.25, 1) 1s infinite;
+}
+
+.shine-logo-sparkle {
+  position: absolute;
+  pointer-events: none;
+  background: radial-gradient(circle, #fff8e1 0 12%, rgb(255 236 179 / 0.6) 22%, transparent 60%);
+  clip-path: polygon(50% 0, 58% 42%, 100% 50%, 58% 58%, 50% 100%, 42% 58%, 0 50%, 42% 42%);
+  opacity: 0;
+  animation: shine-twinkle 5s ease-in-out infinite;
+}
+
+@keyframes shine-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes shine-sweep {
+  0% {
+    background-position: 140% 0;
+  }
+  55%,
+  100% {
+    background-position: -40% 0;
+  }
+}
+
+@keyframes shine-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 14px rgb(204 168 110 / 0.28)) drop-shadow(0 10px 30px rgb(0 0 0 / 0.55));
+  }
+  50% {
+    filter: drop-shadow(0 0 28px rgb(230 196 128 / 0.55)) drop-shadow(0 10px 30px rgb(0 0 0 / 0.55));
+  }
+}
+
+@keyframes shine-twinkle {
+  0%,
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(0.3) rotate(0deg);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(1) rotate(45deg);
+  }
+}
+
 @keyframes marquee {
   from {
     transform: translateX(0);
@@ -155,8 +248,17 @@
 
   .hero-drift,
   .marquee-track,
-  .hero-slide {
+  .hero-slide,
+  .shine-logo,
+  .shine-logo-art,
+  .shine-logo-sweep,
+  .shine-logo-sparkle {
     animation: none;
+  }
+
+  .shine-logo-sweep,
+  .shine-logo-sparkle {
+    display: none;
   }
 }
 

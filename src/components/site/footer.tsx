@@ -12,7 +12,7 @@ export function Footer() {
     <footer className="bg-ink text-creme">
       <div className="container-site grid gap-12 py-16 md:grid-cols-12">
         <div className="md:col-span-4">
-          <Logo tone="cream" className="w-44" />
+          <Logo variant="gold" className="w-48" />
           <p className="mt-6 max-w-xs font-display text-xl italic text-creme/90">{site.tagline}</p>
           <div className="mt-6 h-px w-16 bg-gold" aria-hidden />
           <p className="mt-6 text-sm text-creme/70">

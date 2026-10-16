@@ -231,7 +231,7 @@ export function Header() {
       <UtilityBar />
       <div className="border-b border-line bg-creme/95 backdrop-blur supports-[backdrop-filter]:bg-creme/85">
         <div className="container-site flex h-20 items-center justify-between gap-6">
-          <Logo className="w-36 sm:w-40" />
+          <Logo className="w-[84px] sm:w-[92px]" />
           <DesktopNav pathname={pathname} />
           <div className="flex items-center gap-2">
             <Button asChild size="sm" className="hidden sm:inline-flex">

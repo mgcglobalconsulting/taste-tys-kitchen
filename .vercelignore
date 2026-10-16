@@ -1,0 +1,17 @@
+# Deploy only what the Next.js build needs. Local source material is large.
+taste-tys-assets/
+taste-of-ty-site-pics/
+taste-tys-kitchen-inspiration-only/
+motion/
+*.pdf
+!public/menus/*.pdf
+*.png
+!public/**/*.png
+!src/**/*.png
+regis-site-example-html.txt
+.obsidian/
+.vscode/
+.next/
+node_modules/
+.env*
+!.env.example

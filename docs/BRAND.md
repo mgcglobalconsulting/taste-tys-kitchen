@@ -166,17 +166,22 @@ Contrast checked: yes, 2026-10-16
   photo, and a slow marquee on the service strip. All of it turns off under
   `prefers-reduced-motion`.
 
-### Logo on the light theme
+### Official logo (2026-10-16)
 
-The supplied `chef-ty-logo.PNG` is red artwork on a solid black square and reads
-**"Taste of Ty's Kitchen"** (with a chef's hat on the F). For the light theme it was
-keyed to transparency from the red channel and exported to `public/brand/`:
+The owner supplied the **official logo**: "TOTK — Catering Co. — by Taste of Ty's
+Kitchen", gold on black, with the tagline "Great food is waiting." and the line
+"Catering | Events | Private Dining | More". Source file:
+`~/Downloads/taste-of-tys-kitchen-corporate-logo.PNG` (1254×1254 raster). It replaces
+the earlier red "Taste of Ty's Kitchen" script artwork everywhere.
 
 | File | Use |
 |---|---|
-| `logo-red.png` | Header, on crème |
-| `logo-cream.png` | Footer and dark bands |
-| `logo-ink.png` | Single-colour print / fallback |
+| `public/brand/totk-mark.jpg` | Header: hat + TOTK + "Catering Co." on its black ground |
+| `public/brand/totk-logo-gold.png` | Full lockup keyed to transparency, for dark surfaces (hero, footer) |
+| `public/brand/totk-logo.jpg` | Full lockup on black (structured data, film end card) |
+| `src/app/icon.png`, `apple-icon.png` | Favicon / home-screen icon |
 
-These are 1200px raster exports. A vector logo from the designer is still the right
-long-term fix (see the logo section above).
+The gold artwork never sits directly on crème (gold fails contrast there): on light
+surfaces it stays on its black ground. On the home hero the gold lockup gets a glow,
+a light sweep clipped to the artwork, and a few twinkles (`ShineLogo`); all of it stops
+under `prefers-reduced-motion`. A vector version from the designer is still wanted.

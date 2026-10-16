@@ -10,8 +10,8 @@ export function LocalBusinessJsonLd() {
     description: site.description,
     slogan: site.tagline,
     url: site.url,
-    logo: `${site.url}/brand/logo-red.png`,
-    image: `${site.url}/brand/logo-red.png`,
+    logo: `${site.url}/brand/totk-logo.jpg`,
+    image: `${site.url}/brand/totk-logo.jpg`,
     telephone: "+1-443-226-3279",
     email: site.contact.email,
     address: {
