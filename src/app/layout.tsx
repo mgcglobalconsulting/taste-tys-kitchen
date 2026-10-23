@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Lato } from "next/font/google";
+import { Lato, Playfair_Display } from "next/font/google";
 import type { ReactNode } from "react";
 
 import { Footer } from "@/components/site/footer";
@@ -9,10 +9,11 @@ import { site } from "@/content/site";
 
 import "./globals.css";
 
-const fraunces = Fraunces({
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  variable: "--font-fraunces",
+  variable: "--font-playfair",
   style: ["normal", "italic"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -44,7 +45,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${lato.variable}`}>
+    <html lang="en" className={`${playfair.variable} ${lato.variable}`}>
       <body className="flex min-h-dvh flex-col">
         <LocalBusinessJsonLd />
         <a

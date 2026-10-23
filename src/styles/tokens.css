@@ -12,7 +12,7 @@
   --color-oxblood: #600808;
   --color-gold: #cca86e;
 
-  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-display: var(--font-playfair), ui-serif, Georgia, serif;
   --font-sans: var(--font-lato), ui-sans-serif, system-ui, sans-serif;
 
   --radius-control: 2px;

@@ -467,3 +467,178 @@
     opacity: 0.4;
   }
 }
+
+/* ── Corporate menu — orbital hero (components/site/corp-hero.tsx) ───────── */
+
+@keyframes orbit-cw {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes orbit-ccw {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+
+@keyframes orbit-pulse {
+  0%, 100% { opacity: 0.08; transform: scale(1); }
+  50%       { opacity: 0.18; transform: scale(1.03); }
+}
+
+/* Relative container that holds the logo + orbit rings */
+.corp-orbit-container {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+  .corp-orbit-container {
+    width: 340px;
+    height: 340px;
+  }
+}
+
+/* Ring tracks — absolutely positioned, rotate in place */
+.corp-orbit-track {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgb(204 168 110 / 0.18);
+}
+
+.corp-orbit-track--cw  { animation: orbit-cw  22s linear infinite; }
+.corp-orbit-track--ccw { animation: orbit-ccw 34s linear infinite; }
+
+/* Glowing dots riding on the ring tracks */
+.corp-orbit-dot {
+  position: absolute;
+  top: -4px;
+  left: calc(50% - 4px);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  box-shadow: 0 0 10px 3px rgb(204 168 110 / 0.55);
+}
+
+.corp-orbit-dot--sm {
+  top: -3px;
+  left: calc(50% - 3px);
+  width: 6px;
+  height: 6px;
+  box-shadow: 0 0 7px 2px rgb(204 168 110 / 0.45);
+}
+
+/* Outermost slow-pulse ring — no dots, just a faint breathing halo */
+.corp-orbit-ring-pulse {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px dashed rgb(204 168 110 / 0.12);
+  animation: orbit-pulse 6s ease-in-out infinite;
+}
+
+/* ── Dish stream bubbles (components/site/dish-stream.tsx) ───────────────── */
+
+@keyframes bubble-rise {
+  0%   { opacity: 0; transform: translateY(0)     scale(0.82); }
+  10%  { opacity: 1; transform: translateY(-48px) scale(1);    }
+  82%  { opacity: 0.92; transform: translateY(-340px) scale(1);   }
+  100% { opacity: 0; transform: translateY(-400px) scale(0.92); }
+}
+
+/* Container clips the overflow so bubbles vanish at the top */
+.dish-bubble-arena {
+  position: relative;
+  height: 380px;
+  overflow: hidden;
+}
+
+/* Individual bubble card */
+.dish-bubble {
+  position: absolute;
+  bottom: 0;
+  max-width: 180px;
+  background: var(--color-creme);
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  padding: 10px 14px;
+  box-shadow: 0 4px 18px -6px rgb(20 17 16 / 0.14);
+  animation: bubble-rise 10s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* Static fallback — hidden while motion is running, shown when not */
+.dish-stream-static { display: none; }
+
+/* ── Pan table shimmer hover (components/site/cuisine-tabs.tsx) ──────────── */
+
+.pan-row {
+  position: relative;
+  overflow: hidden;
+  transition: background-color 200ms;
+}
+
+.pan-row::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(204 168 110 / 0.10) 50%,
+    transparent 100%
+  );
+  transform: translateX(-110%);
+  transition: transform 550ms var(--ease-out-soft);
+  pointer-events: none;
+}
+
+.pan-row:hover::after {
+  transform: translateX(110%);
+}
+
+/* ── Tab panel entrance animation ────────────────────────────────────────── */
+
+@keyframes tab-panel-in {
+  from { opacity: 0; transform: translateX(14px); }
+  to   { opacity: 1; transform: translateX(0);    }
+}
+
+.tab-panel-active {
+  animation: tab-panel-in 280ms var(--ease-out-soft) both;
+}
+
+/* ── Reduced motion overrides ────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .corp-orbit-track--cw,
+  .corp-orbit-track--ccw,
+  .corp-orbit-ring-pulse {
+    animation: none;
+  }
+
+  .corp-orbit-dot,
+  .corp-orbit-dot--sm {
+    display: none;
+  }
+
+  .dish-bubble-arena {
+    display: none;
+  }
+
+  .dish-stream-static {
+    display: grid;
+  }
+
+  .tab-panel-active {
+    animation: none;
+  }
+
+  .pan-row::after {
+    display: none;
+  }
+}

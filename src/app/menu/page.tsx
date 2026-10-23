@@ -43,6 +43,22 @@ export default function MenuPage() {
         </Button>
       </PageHero>
 
+      {/* Corporate catalog callout */}
+      <div className="border-b border-line bg-ink text-creme">
+        <div className="container-site flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="eyebrow text-gold mb-1">Corporate Catering</p>
+            <p className="text-sm text-creme/75">Full pan-priced catalog for 10 to 100+ guests — breakfast through dinner, 7 cuisines.</p>
+          </div>
+          <Link
+            href="/menu/corporate"
+            className="shrink-0 rounded-[var(--radius-control)] border border-gold/50 px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-gold transition-colors hover:bg-gold/10"
+          >
+            View catalog →
+          </Link>
+        </div>
+      </div>
+
       <nav aria-label="Menu sections" className="sticky top-[116px] z-30 border-b border-line bg-creme/95 backdrop-blur">
         <ul className="container-site flex gap-6 overflow-x-auto py-3 text-xs font-bold uppercase tracking-[0.16em]">
           {[...menuSections.map((s) => ({ id: s.id, title: s.title })), { id: "packages", title: "Packages" }, { id: "small-bites", title: "Small Bites" }].map(

@@ -135,8 +135,9 @@ section; change both together.
 Direction:        Light and vital. Warm crème ground, black ink, one red accent used
                   sparingly (CTAs, italics in headlines, small rules). Food photography
                   carries the colour; the UI stays quiet around it.
-Display face:     Fraunces (Google Fonts, SIL OFL — free for web). Soft, vintage serif;
-                  stands in for Billionaire, which is not web-licensed.
+Display face:     Playfair Display (Google Fonts, SIL OFL — free for web). Classic elegant
+                  serif; 18th-century inspired, fine-dining authority. Replaces Fraunces
+                  (2026-10-23). See docs/TYPOGRAPHY-RESEARCH.md for full rationale.
 Body face:        Lato (Google Fonts, SIL OFL) — the brand's own tertiary face.
 Surface / bg:     Crème  #FBF8F3   (page)      Linen #F3ECE2 (alternate sections)
 Ink / text:       Ink    #141110   (headings, body, dark bands)
