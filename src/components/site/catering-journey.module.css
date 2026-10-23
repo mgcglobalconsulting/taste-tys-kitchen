@@ -1,0 +1,247 @@
+.journey {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--color-creme);
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background: linear-gradient(115deg, transparent 35%, var(--color-linen));
+}
+
+/* Drifting radial orbs — warm colour wash that pans across the section */
+.orb {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 12% 55%,
+    color-mix(in srgb, var(--color-pinot) 9%, transparent) 0%,
+    transparent 55%
+  );
+  animation: orb-drift 22s ease-in-out infinite alternate;
+}
+
+.goldOrb {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 88% 75%,
+    color-mix(in srgb, var(--color-gold) 11%, transparent) 0%,
+    transparent 48%
+  );
+  animation: orb-drift-r 28s ease-in-out infinite alternate;
+}
+
+.plates {
+  position: absolute;
+  width: clamp(32rem, 65vw, 65rem);
+  right: -14%;
+  top: -65%;
+  stroke: var(--color-pinot);
+  stroke-width: 0.8;
+  opacity: 0.18;
+  animation: plate-pan 24s ease-in-out infinite alternate;
+}
+
+.ribbon {
+  position: absolute;
+  width: 120%;
+  height: 100%;
+  left: -10%;
+  top: 15%;
+  stroke: var(--color-pinot);
+  stroke-width: 0.65;
+  opacity: 0.13;
+  animation: ribbon-pan 20s ease-in-out infinite alternate;
+}
+
+.heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.motionToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  flex-shrink: 0;
+  color: var(--color-smoke);
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.motionToggle:hover {
+  color: var(--color-pinot);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 3.5rem;
+  list-style: none;
+}
+
+.step {
+  min-width: 0;
+}
+
+.milestone {
+  display: flex;
+  align-items: center;
+}
+
+.number {
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  flex-shrink: 0;
+  border: 1px solid var(--color-line);
+  border-radius: 50%;
+  background: var(--color-creme);
+  color: var(--color-smoke);
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-style: italic;
+  transition: color 400ms ease, border-color 400ms ease, box-shadow 400ms ease;
+}
+
+.track {
+  position: relative;
+  flex: 1;
+  height: 2px;
+  background: var(--color-line);
+}
+
+.track > span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(to right, var(--color-pinot), var(--color-gold));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 700ms var(--ease-out-soft);
+}
+
+/* Gold dot that pops at the end of a fully-filled track */
+.step[data-connected="true"] .track::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  translate: 50% -50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--color-gold) 20%, transparent),
+    0 0 10px 3px color-mix(in srgb, var(--color-gold) 45%, transparent);
+  animation: dot-pop 0.4s var(--ease-out-soft) 650ms both;
+}
+
+.step:last-child .track {
+  background: linear-gradient(to right, var(--color-line), transparent);
+}
+
+.step[data-connected="true"] .track > span {
+  transform: scaleX(1);
+}
+
+.step[data-reached="true"] .number {
+  border-color: var(--color-pinot);
+  color: var(--color-pinot);
+}
+
+/* Pulsing ring on the active step — "you are here" */
+.step[data-active="true"] .number {
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+.copy {
+  padding: 1.75rem 2.25rem 0 0;
+  transition: transform 400ms var(--ease-out-soft);
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .step:hover .copy {
+    transform: translateY(-4px);
+  }
+}
+
+.journey[data-paused="true"] .backdrop > svg,
+.journey[data-paused="true"] .orb,
+.journey[data-paused="true"] .goldOrb {
+  animation-play-state: paused;
+}
+
+@keyframes plate-pan {
+  from { transform: translate(-4%, -2%) rotate(-10deg); }
+  to { transform: translate(8%, 10%) rotate(10deg); }
+}
+
+@keyframes ribbon-pan {
+  from { transform: translate(-5%, 6%); }
+  to { transform: translate(5%, -6%); }
+}
+
+@keyframes orb-drift {
+  from { transform: translate(-8%, -6%); }
+  to { transform: translate(7%, 9%); }
+}
+
+@keyframes orb-drift-r {
+  from { transform: translate(7%, 9%); }
+  to { transform: translate(-7%, -9%); }
+}
+
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 5px color-mix(in srgb, var(--color-pinot) 18%, transparent); }
+  70%  { box-shadow: 0 0 0 18px color-mix(in srgb, var(--color-pinot) 0%, transparent); }
+  100% { box-shadow: 0 0 0 18px color-mix(in srgb, var(--color-pinot) 0%, transparent); }
+}
+
+@keyframes dot-pop {
+  from { scale: 0; }
+  to   { scale: 1; }
+}
+
+@media (max-width: 639px) {
+  .heading { align-items: flex-start; flex-direction: column; gap: 1rem; }
+  .plates { top: -5%; right: -100%; opacity: 0.1; }
+  .steps { grid-template-columns: 1fr; margin-top: 2rem; }
+  .step { display: grid; grid-template-columns: 3.5rem 1fr; gap: 1.25rem; }
+  .milestone { flex-direction: column; }
+  .number { width: 3.5rem; height: 3.5rem; font-size: 1.5rem; }
+  .track { width: 2px; height: auto; min-height: 2rem; }
+  .track > span { position: absolute; inset: 0; transform: scaleY(0); transform-origin: top; }
+  .step[data-connected="true"] .track > span { transform: scaleY(1); }
+  /* Dot repositioned for vertical track */
+  .step[data-connected="true"] .track::after {
+    right: 50%;
+    top: auto;
+    bottom: 0;
+    translate: 50% 50%;
+  }
+  .step:last-child .track { display: none; }
+  .copy { padding: 0.75rem 0 2.5rem; }
+  .step:last-child .copy { padding-bottom: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop > svg, .orb, .goldOrb { animation: none; }
+  .number, .track > span, .copy { transition: none; }
+  .step[data-active="true"] .number { animation: none; }
+  .step[data-connected="true"] .track::after { animation: none; scale: 1; }
+  .motionToggle { display: none; }
+  .step .number { border-color: var(--color-pinot); color: var(--color-pinot); box-shadow: none; }
+  .step:not(:last-child) .track > span { transform: none; }
+}
