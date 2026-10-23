@@ -1,0 +1,144 @@
+/* ── DishShowcase — dual-row infinite marquee ──────────────────────────── */
+
+.marqueeWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+/* Fade the edges so cards dissolve in and out smoothly */
+.marqueeOuter {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 14%,
+    black 86%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 14%,
+    black 86%,
+    transparent 100%
+  );
+}
+
+.track {
+  display: flex;
+  gap: 0.875rem;
+  width: max-content;
+  /* Pause on hover so users can read */
+}
+
+.marqueeOuter:hover .track {
+  animation-play-state: paused;
+}
+
+.trackLeft {
+  animation: marquee-left 36s linear infinite;
+}
+
+.trackRight {
+  animation: marquee-right 44s linear infinite;
+}
+
+/* ── Individual card ─────────────────────────────────────────────────────── */
+
+.card {
+  flex-shrink: 0;
+  width: 192px;
+  background: var(--color-creme);
+  border-radius: 16px;
+  border: 1px solid var(--color-line);
+  padding: 1rem 1.125rem 1.125rem;
+  box-shadow:
+    0 2px 12px -4px rgba(20, 17, 16, 0.10),
+    0 1px 3px -1px rgba(20, 17, 16, 0.06);
+  transition: box-shadow 300ms ease, transform 300ms ease;
+}
+
+.card:hover {
+  box-shadow:
+    0 10px 36px -8px rgba(20, 17, 16, 0.16),
+    0 2px 8px -2px rgba(20, 17, 16, 0.08);
+  transform: translateY(-3px);
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.dishName {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  line-height: 1.3;
+  color: var(--color-ink);
+}
+
+.dishNote {
+  font-size: 0.75rem;
+  color: var(--color-smoke);
+  font-style: italic;
+  margin-top: 0.25rem;
+  line-height: 1.4;
+}
+
+.dishPrice {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-pinot);
+  margin-top: 0.625rem;
+  letter-spacing: 0.01em;
+}
+
+/* ── Divider accent above the marquee ───────────────────────────────────── */
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-line);
+}
+
+.dividerDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  box-shadow: 0 0 6px 2px color-mix(in srgb, var(--color-gold) 40%, transparent);
+}
+
+/* ── Animations ─────────────────────────────────────────────────────────── */
+
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trackLeft,
+  .trackRight { animation: none; }
+}
