@@ -51,10 +51,10 @@ function UtilityBar() {
 
 function DesktopNav({ pathname }: { pathname: string }) {
   return (
-    <NavigationMenu.Root className="relative hidden lg:block" delayDuration={80}>
+    <NavigationMenu.Root className="relative hidden lg:flex" delayDuration={100}>
       <NavigationMenu.List className="flex items-center gap-1">
         {nav.map((item) => (
-          <NavigationMenu.Item key={item.label} className="relative">
+          <NavigationMenu.Item key={item.label}>
             {item.children ? (
               <>
                 <NavigationMenu.Trigger
@@ -69,29 +69,31 @@ function DesktopNav({ pathname }: { pathname: string }) {
                     aria-hidden
                   />
                 </NavigationMenu.Trigger>
-                <NavigationMenu.Content className="absolute left-1/2 top-full z-50 w-[22rem] -translate-x-1/2 pt-3 data-[motion^=from-]:animate-none">
-                  <ul className="rounded-[var(--radius-media)] border border-line bg-creme p-2 shadow-[0_18px_40px_-20px_rgba(20,17,16,0.35)]">
+
+                {/* Content lives inside the shared Viewport below */}
+                <NavigationMenu.Content>
+                  <ul className="w-[22rem] p-2">
                     {hasOverview(item) ? (
-                    <li>
-                      <NavigationMenu.Link asChild>
-                        <Link
-                          href={item.href}
-                          className="block rounded-[var(--radius-control)] px-4 py-3 transition-colors hover:bg-linen"
-                        >
-                          <span className="eyebrow text-[0.6875rem]">Overview</span>
-                          <span className="mt-1 block font-display text-lg leading-tight text-ink">
-                            All {item.label.toLowerCase()}
-                          </span>
-                        </Link>
-                      </NavigationMenu.Link>
-                    </li>
+                      <li>
+                        <NavigationMenu.Link asChild>
+                          <Link
+                            href={item.href}
+                            className="block rounded-[var(--radius-control)] px-4 py-3 transition-colors hover:bg-linen"
+                          >
+                            <span className="eyebrow text-[0.6875rem]">Overview</span>
+                            <span className="mt-1 block font-display text-lg leading-tight text-ink">
+                              All {item.label.toLowerCase()}
+                            </span>
+                          </Link>
+                        </NavigationMenu.Link>
+                      </li>
                     ) : null}
                     {item.children.map((child) => (
                       <li key={child.href}>
                         <NavigationMenu.Link asChild>
                           <Link
                             href={child.href}
-                            className="block rounded-[var(--radius-control)] px-4 py-3 transition-colors hover:bg-linen"
+                            className="nav-dropdown-item block rounded-[var(--radius-control)] px-4 py-3 transition-colors hover:bg-linen"
                           >
                             <span className="block font-display text-lg leading-tight text-ink">
                               {child.label}
@@ -121,6 +123,11 @@ function DesktopNav({ pathname }: { pathname: string }) {
           </NavigationMenu.Item>
         ))}
       </NavigationMenu.List>
+
+      {/* Single animated viewport — renders whichever Content is active */}
+      <div className="absolute left-0 top-full z-50 flex w-full justify-center pt-2">
+        <NavigationMenu.Viewport className="nav-viewport" />
+      </div>
     </NavigationMenu.Root>
   );
 }
@@ -170,7 +177,7 @@ function MobileNav() {
                         />
                       </Accordion.Trigger>
                     </Accordion.Header>
-                    <Accordion.Content className="pb-4">
+                    <Accordion.Content className="accordion-content pb-4">
                       <ul className="space-y-1 border-l-2 border-pinot pl-4">
                         {hasOverview(item) ? (
                           <li>

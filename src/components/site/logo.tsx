@@ -28,14 +28,16 @@ export function Logo({ variant = "mark", className }: LogoProps) {
           className="h-auto w-full rounded-[var(--radius-media)] shadow-[0_6px_18px_-10px_rgba(20,17,16,0.7)]"
         />
       ) : (
-        <Image
-          src="/brand/totk-logo-gold.png"
-          alt="TOTK Catering Co. by Taste of Ty's Kitchen"
-          width={959}
-          height={1000}
-          sizes="240px"
-          className="h-auto w-full"
-        />
+        <div className="rounded-[var(--radius-media)] bg-ink/75 px-2.5 py-2 shadow-[0_4px_16px_-8px_rgba(20,17,16,0.45)]">
+          <Image
+            src="/brand/totk-logo-gold.png"
+            alt="TOTK Catering Co. by Taste of Ty's Kitchen"
+            width={959}
+            height={1000}
+            sizes="120px"
+            className="h-auto w-full"
+          />
+        </div>
       )}
     </Link>
   );

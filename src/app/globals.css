@@ -468,6 +468,131 @@
   }
 }
 
+/* ── Desktop nav dropdown viewport (components/site/header.tsx) ─────────── */
+
+@keyframes nav-vp-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes nav-vp-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.97);
+  }
+}
+
+/* Content slide when switching between menu items */
+@keyframes nav-from-left {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes nav-from-right {
+  from { opacity: 0; transform: translateX(10px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes nav-to-left {
+  from { opacity: 1; transform: none; }
+  to   { opacity: 0; transform: translateX(-10px); }
+}
+@keyframes nav-to-right {
+  from { opacity: 1; transform: none; }
+  to   { opacity: 0; transform: translateX(10px); }
+}
+
+/* The shared viewport panel */
+.nav-viewport {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-media);
+  border: 1px solid var(--color-line);
+  background: var(--color-creme);
+  box-shadow: 0 18px 40px -20px rgb(20 17 16 / 0.35), 0 4px 16px -8px rgb(20 17 16 / 0.12);
+  /* Smoothly resizes as content changes */
+  width: var(--radix-navigation-menu-viewport-width);
+  height: var(--radix-navigation-menu-viewport-height);
+  transition: width 220ms var(--ease-out-soft), height 220ms var(--ease-out-soft);
+  transform-origin: top center;
+}
+
+.nav-viewport[data-state="open"] {
+  animation: nav-vp-in 220ms var(--ease-out-soft) both;
+}
+
+.nav-viewport[data-state="closed"] {
+  animation: nav-vp-out 180ms ease-in both;
+}
+
+/* Content transitions when switching between top-level items */
+.nav-viewport [data-motion="from-start"] {
+  animation: nav-from-left 220ms var(--ease-out-soft) both;
+}
+.nav-viewport [data-motion="from-end"] {
+  animation: nav-from-right 220ms var(--ease-out-soft) both;
+}
+.nav-viewport [data-motion="to-start"] {
+  animation: nav-to-left 180ms ease-in both;
+}
+.nav-viewport [data-motion="to-end"] {
+  animation: nav-to-right 180ms ease-in both;
+}
+
+/* Row hover highlight */
+.nav-dropdown-item {
+  position: relative;
+  transition: background-color 150ms, padding-left 150ms;
+}
+.nav-dropdown-item:hover {
+  padding-left: 20px;
+}
+
+/* ── Mobile accordion (components/site/header.tsx) ───────────────────────── */
+
+@keyframes accordion-down {
+  from { height: 0; opacity: 0; }
+  to   { height: var(--radix-accordion-content-height); opacity: 1; }
+}
+
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); opacity: 1; }
+  to   { height: 0; opacity: 0; }
+}
+
+.accordion-content {
+  overflow: hidden;
+}
+
+.accordion-content[data-state="open"] {
+  animation: accordion-down 260ms var(--ease-out-soft) both;
+}
+
+.accordion-content[data-state="closed"] {
+  animation: accordion-up 200ms ease-in both;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .nav-viewport,
+  .nav-viewport[data-state="open"],
+  .nav-viewport[data-state="closed"],
+  .nav-viewport [data-motion],
+  .accordion-content[data-state="open"],
+  .accordion-content[data-state="closed"] {
+    animation: none;
+    transition: none;
+  }
+}
+
 /* ── Corporate menu — orbital hero (components/site/corp-hero.tsx) ───────── */
 
 @keyframes orbit-cw {
