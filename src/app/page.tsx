@@ -350,14 +350,21 @@ export default function HomePage() {
       {/* Social strip */}
       <section className="border-t border-line bg-linen">
         <div className="container-site py-16 sm:py-20">
-          <div className="flex flex-col items-center gap-2 text-center">
+          <div className="flex flex-col items-center gap-4 text-center">
             <p className="eyebrow">Follow us</p>
             <a
               href={site.social.instagram.url}
-              rel="noopener"
-              className="font-display text-3xl hover:text-pinot sm:text-4xl"
+              rel="noopener noreferrer"
+              aria-label={`Follow ${site.social.instagram.handle} on Instagram`}
+              className="inline-block overflow-hidden rounded-2xl transition-opacity hover:opacity-80"
             >
-              {site.social.instagram.handle}
+              <Image
+                src="/brand/ty_s_kitchen_social.jpg"
+                alt={`${site.social.instagram.handle} on Instagram`}
+                width={320}
+                height={120}
+                className="block"
+              />
             </a>
           </div>
           <ul className="mt-10 grid grid-cols-3 gap-2 sm:gap-3 lg:grid-cols-6">

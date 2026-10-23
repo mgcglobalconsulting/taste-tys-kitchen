@@ -31,7 +31,7 @@ export function FindUs() {
           >
             <Phone className="size-5 shrink-0 text-pinot" aria-hidden /> {site.contact.phoneDisplay}
           </a>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-8 grid grid-cols-2 gap-3">
             <Button asChild>
               <Link href={primaryCta.href}>{primaryCta.label}</Link>
             </Button>
@@ -43,7 +43,7 @@ export function FindUs() {
           </div>
         </Reveal>
         <div className="lg:col-span-8">
-          <LocationMap variant="compact" />
+          <LocationMap variant="compact" className="rounded-3xl" />
         </div>
       </div>
     </section>

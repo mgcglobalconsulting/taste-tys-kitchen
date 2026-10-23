@@ -1,4 +1,4 @@
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Heart, Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 
 import { addressLines, directionsUrl, nav, primaryCta, site } from "@/content/site";
@@ -15,7 +15,11 @@ export function Footer() {
           <Logo variant="gold" className="w-48" />
           <p className="mt-6 max-w-xs font-display text-xl italic text-creme/90">{site.tagline}</p>
           <div className="mt-6 h-px w-16 bg-gold" aria-hidden />
-          <p className="mt-6 text-sm text-creme/70">
+          <div className="mt-6 flex w-fit items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-4 py-2">
+            <Heart className="size-3.5 fill-gold text-gold" aria-hidden />
+            <span className="font-display text-sm italic tracking-wide text-gold">Join the movement</span>
+          </div>
+          <p className="mt-3 text-sm text-creme/70">
             A portion of our proceeds goes toward feeding the homeless in our community every week.
           </p>
         </div>

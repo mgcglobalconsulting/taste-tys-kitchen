@@ -38,3 +38,10 @@ motion/**/.hyperframes/
 motion/**/renders/
 motion/**/node_modules/
 .vercel
+
+# Agent/skill tool artifacts — installed locally, not source code
+.agents/
+.claude/
+.firecrawl/
+skills-lock.json
+tsconfig.tsbuildinfo
