@@ -46,11 +46,33 @@ In the order given in the email:
 
 ## About the owner
 
-**[MISSING]** The email lists the heading "About the owner paragraph (pic of owner)"
-but contains no paragraph text. Request this from the owner, along with the photo.
+**Source:** Owner-supplied biography in chat, 2026-10-24. Wording preserved;
+paragraph breaks and whitespace normalized for readability.
 
-Candidate photos already on hand: `chefty-candid-1.JPG`, `chef-ty-barnes-nobles.jpeg`,
-`chef-ty-plating.jpg`.
+**Chef Ty, Brand Owner** — Tiesha B. Quezada. Display title **Founder & CEO**,
+as requested by the owner. Pull quote: **“Food is storytelling.”**
+
+Tiesha B. Quezada, also known as Ty, is a multifaceted, self-taught chef. Born and raised in Long Island, New York, Ty grew up in a kitchen where food was the epicenter of family life. Her earliest lessons in cooking came not from culinary school, but from watching her neighbors, friends, and family prepare traditional meals in their homes. Influenced by her entrepreneurial mother and her hardworking Dominican father, she was preordained for success.
+
+With no formal training, Chef Ty began experimenting in her own kitchen as a teenager—mixing flavors, techniques, and spices from the different cultures that shaped her upbringing. She documented her culinary journey through a vlog and social media, where her inventive dishes—like jerk mushroom tacos and loaded 6 cheese Mac Bowls—gained a passionate following.
+
+In 2012, Ty graduated from Baltimore City Community College with a degree in legal studies. While she enjoyed studying law, her true passion lay in cooking and the joy her food brought to others. In 2019, she launched her mobile food business, Taste of Ty’s Kitchen, LLC.
+
+As a studied professional, Ty excels at adapting menus to various tastes, diets, and cultures. She is constantly seeking new ways to enhance meals through fresh recipes, diverse food varieties, and creative plating. Additionally, Ty is fully certified in food safety and sanitation.
+
+Chef Ty’s philosophy is simple: food is storytelling. Every dish she creates tells a story of migration, memory, and identity. She eventually opened her own ghost kitchen, Taste of Ty’s Kitchen, which rotates menus every season to highlight underrepresented cuisines from across the diaspora.
+
+She started filming her own cooking show with a production company headquartered in Long Island, New York. That opportunity flourished into her publishing her own cookbook, which is sold on the shelves of Barnes and Nobles.
+
+Now a rising star in the culinary world, Ty continues to defy convention and inspire others with her belief that anyone—with heart, curiosity, and determination—can create magic in the kitchen, regardless of their background or formal education.
+
+**Bio photograph:** The owner selected `chefty-and-shalonda.jpeg` on 2026-10-24:
+Chef Ty with Shalonda Stokes, identified by the owner as president of Downtown
+Partnership. The About page displays the full photo without cropping.
+
+**CTA beneath the bio photograph (owner request, 2026-10-24):** “WE answer! When YOU
+call...” followed by the existing business phone link, and “Follow us:” with linked
+Instagram and Facebook logos using the confirmed social profiles below.
 
 ---
 
@@ -177,7 +199,9 @@ Per `.github/agents/chef-tys-kitchen-spec.agent.md`, and because the research re
 - No client logos, awards, or testimonials beyond what's evidenced
 - No guaranteed turnaround, capacity, or staffing claims
 - Nothing carried over from the Zeffert & Gold reference site
-- No certifications, licensing, or insurance claims
+- No certifications, licensing, or insurance claims beyond the owner-supplied food
+  safety and sanitation certification in the biography above; no credential or issuer
+  details have been supplied
 
 The one award asset on hand is `taste-of-tys-award.jpeg`. Confirm what it is before
 captioning it.

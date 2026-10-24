@@ -113,6 +113,17 @@ at build time — which is the whole reason not to hand-optimize these.
 
 Expected result: ~20MB of sources serving as roughly 1.5–2MB of actual transfer.
 
+## Approved bio photograph (2026-10-24)
+
+The owner supplied `~/Downloads/chefty-and-shalonda.jpeg` and selected it for the
+About page beside Chef Ty's biography. The owner identifies the subjects as Chef Ty
+and Shalonda Stokes, president of Downtown Partnership.
+
+Despite its extension, the original is HEIF (4032×3024). The site uses a converted
+1800×1350 JPEG at `src/assets/photos/chefty-and-shalonda.jpg` (under 1MB), served
+through `next/image`. Its 4:3 frame and `object-contain` preserve the entire photograph.
+The original download is untouched.
+
 ## Before launch
 
 - [ ] Request the 15MP Canon originals from the 2023-10-28 shoot
@@ -122,7 +133,7 @@ Expected result: ~20MB of sources serving as roughly 1.5–2MB of actual transfe
 - [ ] Get or trace a vector logo
 - [ ] Move `menu-example.pdf` to `public/menus/`
 - [ ] Confirm what `taste-of-tys-award.jpeg` depicts
-- [ ] Owner's portrait for the "About the owner" section — none of the current files
-      were confirmed as the intended one
+- [x] Owner's photo for the "About the owner" section — `chefty-and-shalonda.jpeg`
+      selected by the owner on 2026-10-24
 - [ ] Owner asked for "10–12" gallery images; there are enough files, but confirm which
       are approved and which are actually *her work* rather than reference

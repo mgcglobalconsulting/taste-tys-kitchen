@@ -8,6 +8,7 @@ import chefTyPlating from "@/assets/photos/chef-ty-plating.jpg";
 import chefTyServing from "@/assets/photos/chef-ty-serving-the-ppl.jpg";
 import chefTySetup4 from "@/assets/photos/chef-ty-setup-4.jpg";
 import shrimpCocktail from "@/assets/photos/chef-tyshrimp-cocktail.jpg";
+import chefTyAndShalonda from "@/assets/photos/chefty-and-shalonda.jpg";
 import candid1 from "@/assets/photos/chefty-candid-1.jpg";
 import crostini from "@/assets/photos/chefty-crostinos.jpg";
 import fineDining from "@/assets/photos/fine-dining.jpg";
@@ -96,6 +97,10 @@ export const photos = {
   candid: {
     src: candid1,
     alt: "Chef Ty working a buffet station at an event",
+  },
+  ownerBio: {
+    src: chefTyAndShalonda,
+    alt: "Chef Ty with Shalonda Stokes, president of Downtown Partnership, at an outdoor food event",
   },
   team: {
     src: chefTyGroup,

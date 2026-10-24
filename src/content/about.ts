@@ -7,6 +7,23 @@ export const aboutCompany = [
   "At our core, we believe food is meant to bring people together — and give back. A portion of our proceeds goes toward feeding the homeless in our community every week.",
 ];
 
+/** Owner biography supplied in chat, 2026-10-24; whitespace normalized. */
+export const aboutOwner = {
+  name: "Chef Ty",
+  fullName: "Tiesha B. Quezada",
+  role: "Founder & CEO",
+  quote: "Food is storytelling.",
+  bio: [
+    "Tiesha B. Quezada, also known as Ty, is a multifaceted, self-taught chef. Born and raised in Long Island, New York, Ty grew up in a kitchen where food was the epicenter of family life. Her earliest lessons in cooking came not from culinary school, but from watching her neighbors, friends, and family prepare traditional meals in their homes. Influenced by her entrepreneurial mother and her hardworking Dominican father, she was preordained for success.",
+    "With no formal training, Chef Ty began experimenting in her own kitchen as a teenager—mixing flavors, techniques, and spices from the different cultures that shaped her upbringing. She documented her culinary journey through a vlog and social media, where her inventive dishes—like jerk mushroom tacos and loaded 6 cheese Mac Bowls—gained a passionate following.",
+    "In 2012, Ty graduated from Baltimore City Community College with a degree in legal studies. While she enjoyed studying law, her true passion lay in cooking and the joy her food brought to others. In 2019, she launched her mobile food business, Taste of Ty’s Kitchen, LLC.",
+    "As a studied professional, Ty excels at adapting menus to various tastes, diets, and cultures. She is constantly seeking new ways to enhance meals through fresh recipes, diverse food varieties, and creative plating. Additionally, Ty is fully certified in food safety and sanitation.",
+    "Chef Ty’s philosophy is simple: food is storytelling. Every dish she creates tells a story of migration, memory, and identity. She eventually opened her own ghost kitchen, Taste of Ty’s Kitchen, which rotates menus every season to highlight underrepresented cuisines from across the diaspora.",
+    "She started filming her own cooking show with a production company headquartered in Long Island, New York. That opportunity flourished into her publishing her own cookbook, which is sold on the shelves of Barnes and Nobles.",
+    "Now a rising star in the culinary world, Ty continues to defy convention and inspire others with her belief that anyone—with heart, curiosity, and determination—can create magic in the kitchen, regardless of their background or formal education.",
+  ],
+} as const;
+
 export const vision =
   "Taste of Ty's Kitchen exists to become a nationally recognized culinary brand that transforms the way people experience food — by blending culture, creativity, and community into every meal, while building a legacy that inspires others to create something from nothing.";
 

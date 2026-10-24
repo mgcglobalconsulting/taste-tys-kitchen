@@ -1,0 +1,107 @@
+.sidebar {
+  width: 100%;
+  max-width: 40rem;
+  margin-inline: auto;
+}
+
+.followLabel {
+  position: relative;
+}
+
+.followLabel::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  background: linear-gradient(110deg, transparent 35%, var(--color-pinot) 46%, var(--color-creme) 50%, var(--color-pinot) 54%, transparent 65%);
+  background-size: 300% 100%;
+  background-clip: text;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes follow-glimmer {
+  0% { background-position: 100% 0; opacity: 0; }
+  15%, 85% { opacity: 1; }
+  100% { background-position: 0% 0; opacity: 0; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .socialGroup:focus-within .followLabel::after {
+    animation: follow-glimmer 900ms ease-in-out;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .socialGroup:hover .followLabel::after {
+    animation: follow-glimmer 900ms ease-in-out;
+  }
+}
+
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--color-line);
+  border-radius: 50%;
+  background: var(--color-creme);
+  color: var(--color-ink);
+}
+
+.socialLink:hover {
+  border-color: var(--color-pinot);
+  background: var(--color-pinot);
+  color: var(--color-creme);
+}
+
+/* Keep every contact link reachable on shorter desktop windows. */
+@media (min-width: 1024px) and (min-height: 900px) {
+  .sidebar {
+    position: sticky;
+    top: 8rem;
+  }
+}
+
+.frame {
+  position: relative;
+  isolation: isolate;
+  margin: 0 5px 10px;
+  padding: 10px;
+  border: 1px solid color-mix(in srgb, var(--color-smoke) 30%, transparent);
+  border-radius: 24px;
+  background: var(--color-creme);
+  box-shadow: 0 8px 24px rgb(20 17 16 / 6%);
+}
+
+.frame::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 8px -8px -8px 8px;
+  border: 1px solid color-mix(in srgb, var(--color-pinot) 25%, transparent);
+  border-radius: 24px;
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .frame {
+    transition:
+      transform 450ms var(--ease-out-soft),
+      box-shadow 450ms var(--ease-out-soft);
+  }
+
+  .frame::before {
+    transition: transform 450ms var(--ease-out-soft);
+  }
+
+  .frame:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgb(20 17 16 / 9%);
+  }
+
+  .frame:hover::before {
+    transform: translate(2px, 2px);
+  }
+}

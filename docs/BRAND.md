@@ -163,6 +163,10 @@ Contrast checked: yes, 2026-10-16
   12–13px. Body in Lato 400 at 17–18px, leading 1.65.
 - **Corners and depth:** 2px radius on buttons and fields, 4px on images. No heavy
   shadows; use hairline borders (`#E6DED3`) and whitespace instead.
+  Owner-approved exception (2026-10-24): the About bio photo uses a rounded 24px frame
+  and 14px inner image, with a pill-shaped phone CTA. Center the photo and contact
+  details on one axis; place “Follow us:” above circular social links. A brief CSS
+  text glimmer runs on social-group hover or keyboard focus, with reduced motion respected.
 - **Motion:** gentle fade-and-rise on scroll (500ms, ease-out), a slow scale on the hero
   photo, and a slow marquee on the service strip. All of it turns off under
   `prefers-reduced-motion`.
