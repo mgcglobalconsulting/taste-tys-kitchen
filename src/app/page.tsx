@@ -12,6 +12,7 @@ import { ShineLogo } from "@/components/site/shine-logo";
 import { PromoVideo } from "@/components/site/promo-video";
 import { Reveal } from "@/components/site/reveal";
 import { SectionHeading } from "@/components/site/section-heading";
+import { TestimonialsStrip } from "@/components/site/testimonials-strip";
 import { Button } from "@/components/ui/button";
 import { aboutCompany } from "@/content/about";
 import { photos, type PhotoKey } from "@/content/photos";
@@ -91,6 +92,11 @@ export default function HomePage() {
               <Link href="/menu">View the Menu</Link>
             </Button>
           </div>
+
+          {/* Trust signals — all facts are from docs/CONTENT.md */}
+          <p className="mt-6 text-sm text-creme/55" aria-hidden>
+            5+ years experience&nbsp;&nbsp;·&nbsp;&nbsp;VIP consultation included&nbsp;&nbsp;·&nbsp;&nbsp;Dietary-friendly menus
+          </p>
         </div>
       </section>
 
@@ -384,7 +390,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      <CtaBand />
+      {/* Testimonials */}
+      <TestimonialsStrip />
+
+      <CtaBand
+        title="Now booking. Secure your date."
+        body="Every client receives a VIP consultation where we tailor menus to their vision, dietary needs, and goals. Great food with purpose — from first call to last bite."
+      />
 
       <FindUs />
     </>

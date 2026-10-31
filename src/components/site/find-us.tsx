@@ -1,4 +1,4 @@
-import { MapPin, Navigation, Phone } from "lucide-react";
+import { CalendarClock, MapPin, Navigation, Phone } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
@@ -31,6 +31,22 @@ export function FindUs() {
           >
             <Phone className="size-5 shrink-0 text-pinot" aria-hidden /> {site.contact.phoneDisplay}
           </a>
+
+          {/*
+           * Operating hours — placeholder.
+           * Owner (Tiesha B. Quezada) must confirm exact days/hours before launch.
+           * "By appointment" is always accurate for a mobile catering company.
+           */}
+          <div className="mt-4 flex items-start gap-3 text-smoke">
+            <CalendarClock className="mt-0.5 size-5 shrink-0 text-pinot" aria-hidden />
+            <div>
+              <p className="text-lg leading-snug">Available by appointment</p>
+              <p className="mt-0.5 text-sm text-smoke/70">
+                Contact us to check availability &amp; reserve your date
+              </p>
+            </div>
+          </div>
+
           <div className="mt-8 grid grid-cols-2 gap-3">
             <Button asChild>
               <Link href={primaryCta.href}>{primaryCta.label}</Link>

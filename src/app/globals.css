@@ -737,6 +737,23 @@
   animation: tab-panel-in 280ms var(--ease-out-soft) both;
 }
 
+/* ── Testimonials carousel (components/site/testimonials-strip.tsx) ────────── */
+
+@keyframes testimonial-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.testimonial-card-enter {
+  animation: testimonial-in 540ms var(--ease-out-soft) both;
+}
+
 /* ── Reduced motion overrides ────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
@@ -765,5 +782,9 @@
 
   .pan-row::after {
     display: none;
+  }
+
+  .testimonial-card-enter {
+    animation: none;
   }
 }
