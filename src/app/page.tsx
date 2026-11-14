@@ -13,6 +13,7 @@ import { PromoVideo } from "@/components/site/promo-video";
 import { Reveal } from "@/components/site/reveal";
 import { SectionHeading } from "@/components/site/section-heading";
 import { TestimonialsStrip } from "@/components/site/testimonials-strip";
+import { TrustBadges } from "@/components/site/trust-badges";
 import { Button } from "@/components/ui/button";
 import { aboutCompany } from "@/content/about";
 import { photos, type PhotoKey } from "@/content/photos";
@@ -94,9 +95,7 @@ export default function HomePage() {
           </div>
 
           {/* Trust signals — all facts are from docs/CONTENT.md */}
-          <p className="mt-6 text-sm text-creme/55" aria-hidden>
-            5+ years experience&nbsp;&nbsp;·&nbsp;&nbsp;VIP consultation included&nbsp;&nbsp;·&nbsp;&nbsp;Dietary-friendly menus
-          </p>
+          <TrustBadges />
         </div>
       </section>
 

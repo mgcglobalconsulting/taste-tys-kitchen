@@ -10,8 +10,9 @@ export async function notifyOwner(
   replyTo?: string,
 ) {
   const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.NOTIFY_EMAIL;
-  if (!apiKey || !to) return;
+  const toRaw = process.env.NOTIFY_EMAIL;
+  if (!apiKey || !toRaw) return;
+  const to = toRaw.split(",").map((e) => e.trim()).filter(Boolean);
 
   const body = Object.entries(fields)
     .map(([label, value]) => {
@@ -26,7 +27,7 @@ export async function notifyOwner(
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         from: process.env.NOTIFY_FROM ?? "Taste of Ty's Kitchen <onboarding@resend.dev>",
-        to: [to],
+        to,
         subject,
         ...(replyTo ? { reply_to: replyTo } : {}),
         text: `${body}\n\nSaved in Supabase.`,
