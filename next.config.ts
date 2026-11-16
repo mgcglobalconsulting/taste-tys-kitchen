@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  experimental: { agentUpgrade: "security" },
   // A package-lock.json in the home directory otherwise confuses root detection.
   turbopack: { root: process.cwd() },
   images: {
