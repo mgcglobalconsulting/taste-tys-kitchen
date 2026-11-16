@@ -15,7 +15,7 @@ export function FindUs() {
         <Reveal className="lg:col-span-4">
           <p className="eyebrow mb-4">Find us</p>
           <h2 id="find-us-heading" className="text-4xl sm:text-5xl">
-            Annapolis Road, <em className="text-pinot">Baltimore.</em>
+            S. Central Ave, <em className="text-pinot">Baltimore.</em>
           </h2>
           <address className="mt-6 flex gap-3 not-italic text-lg text-smoke">
             <MapPin className="mt-1 size-5 shrink-0 text-pinot" aria-hidden />

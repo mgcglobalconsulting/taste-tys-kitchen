@@ -13,15 +13,15 @@ export const site = {
     "Taste of Ty's Kitchen is a full-service mobile catering company with over 5 years of experience delivering elevated, globally inspired cuisine.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://tyskitchen.org",
   base: "Baltimore, MD",
-  /** Supplied by the owner 2026-10-16. Geocoded with OpenStreetMap Nominatim. */
+  /** Updated 2026-11-16 per owner: official business address. */
   address: {
-    street: "2839 Annapolis Rd",
+    street: "210 S. Central Ave",
     city: "Baltimore",
     region: "MD",
-    postalCode: "21230",
+    postalCode: "21202",
     country: "US",
-    lat: 39.2541581,
-    lng: -76.6385623,
+    lat: 39.2847,
+    lng: -76.5951,
   },
   contact: {
     email: "info@tyskitchen.org",
@@ -88,6 +88,7 @@ export const nav: NavItem[] = [
     ],
   },
   { label: "Menu", href: "/menu" },
+  { label: "Order", href: "/order" },
   {
     label: "About",
     href: "/about",

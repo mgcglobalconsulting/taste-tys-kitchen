@@ -56,6 +56,22 @@ export default function MenuPage() {
         </Button>
       </PageHero>
 
+      {/* Order online callout */}
+      <div className="border-b border-line bg-pinot text-creme">
+        <div className="container-site flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="eyebrow text-creme/70 mb-1">Ready to order?</p>
+            <p className="text-sm text-creme/90">Browse the full menu with pricing and add items directly to your cart.</p>
+          </div>
+          <Link
+            href="/order"
+            className="shrink-0 rounded-[var(--radius-control)] bg-creme px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-pinot transition-colors hover:bg-creme/90"
+          >
+            Order Now →
+          </Link>
+        </div>
+      </div>
+
       {/* Corporate catalog callout */}
       <div className="border-b border-line bg-ink text-creme">
         <div className="container-site flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:justify-between">

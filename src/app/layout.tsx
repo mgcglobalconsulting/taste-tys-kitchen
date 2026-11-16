@@ -6,6 +6,7 @@ import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
 import { LocalBusinessJsonLd } from "@/components/site/local-business-jsonld";
 import { site } from "@/content/site";
+import { CartProvider } from "@/lib/cart";
 
 import "./globals.css";
 
@@ -54,11 +55,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         >
           Skip to content
         </a>
-        <Header />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <CartProvider>
+          <Header />
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );
