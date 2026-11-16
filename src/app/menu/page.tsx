@@ -1,4 +1,4 @@
-import { Check, Star } from "lucide-react";
+import { Check, ChevronRight, Star } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -129,8 +129,19 @@ export default function MenuPage() {
                   {section.items.map((item) => (
                     <li key={item.name} className="menu-item-row group relative pl-4 transition-colors hover:bg-linen/60 rounded-sm py-1">
                       <span className="absolute left-0 top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-gold/50 transition-colors group-hover:bg-gold" />
-                      <p className="font-display text-xl">{item.name}</p>
-                      {item.note ? <p className="text-sm italic text-smoke">{item.note}</p> : null}
+                      <Link
+                        href={`/menu/${section.id}/${item.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
+                        className="group flex items-center justify-between"
+                      >
+                        <div>
+                          <p className="font-display text-xl">{item.name}</p>
+                          {item.note ? <p className="text-sm italic text-smoke">{item.note}</p> : null}
+                        </div>
+                        <ChevronRight
+                          className="size-4 shrink-0 text-gold/0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-gold/70"
+                          aria-hidden
+                        />
+                      </Link>
                     </li>
                   ))}
                 </ul>
