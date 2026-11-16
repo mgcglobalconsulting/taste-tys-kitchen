@@ -54,6 +54,7 @@ export type NavItem = NavLink & {
 };
 
 export const primaryCta: NavLink = { label: "Book a Consultation", href: "/book" };
+export const orderCta: NavLink = { label: "Order Online", href: "/order" };
 
 export const nav: NavItem[] = [
   {
@@ -88,7 +89,6 @@ export const nav: NavItem[] = [
     ],
   },
   { label: "Menu", href: "/menu" },
-  { label: "Order", href: "/order" },
   {
     label: "About",
     href: "/about",

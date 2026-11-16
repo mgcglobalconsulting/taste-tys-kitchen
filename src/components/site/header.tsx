@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { nav, primaryCta, site, type NavItem } from "@/content/site";
+import { nav, orderCta, primaryCta, site, type NavItem } from "@/content/site";
 import { cn } from "@/lib/utils";
 
 import { Logo } from "./logo";
@@ -215,6 +215,11 @@ function MobileNav() {
             </Accordion.Root>
           </nav>
           <div className="space-y-3 border-t border-line p-4">
+            <Button asChild size="lg" className="w-full border-pinot bg-pinot text-creme hover:bg-pinot/90">
+              <Link href={orderCta.href} onClick={close}>
+                {orderCta.label}
+              </Link>
+            </Button>
             <Button asChild size="lg" className="w-full">
               <Link href={primaryCta.href} onClick={close}>
                 {primaryCta.label}
@@ -241,6 +246,9 @@ export function Header() {
           <Logo className="w-[84px] sm:w-[92px]" />
           <DesktopNav pathname={pathname} />
           <div className="flex items-center gap-2">
+            <Button asChild variant="outline" size="sm" className="hidden lg:inline-flex border-pinot text-pinot hover:bg-pinot hover:text-creme">
+              <Link href={orderCta.href}>{orderCta.label}</Link>
+            </Button>
             <Button asChild size="sm" className="hidden sm:inline-flex">
               <Link href={primaryCta.href}>{primaryCta.label}</Link>
             </Button>
