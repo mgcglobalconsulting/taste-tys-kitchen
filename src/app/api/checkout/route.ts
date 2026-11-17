@@ -12,7 +12,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Cart is empty" }, { status: 400 });
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://tyskitchen.org";
+  const baseUrl = `https://${new URL(request.url).host}`;
 
   const session = await stripe.checkout.sessions.create({
     line_items: items.map((item) => ({
