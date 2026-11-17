@@ -16,7 +16,7 @@ export function SectionBanner({ id, label, flavor, photo }: SectionBannerProps) 
   const dur = reduce ? 0 : 1;
 
   return (
-    <div className="relative mb-6 h-44 overflow-hidden rounded-[var(--radius-media)] sm:h-52">
+    <div className="relative mb-5 h-32 overflow-hidden rounded-[var(--radius-media)] sm:h-52">
       {/* Food photo with vignette */}
       <motion.div
         key={id}
@@ -39,7 +39,7 @@ export function SectionBanner({ id, label, flavor, photo }: SectionBannerProps) 
       </motion.div>
 
       {/* Text */}
-      <div className="absolute inset-x-0 bottom-0 p-5">
+      <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
         <motion.h2
           key={`${id}-title`}
           className="font-display text-2xl font-semibold text-creme sm:text-3xl"
@@ -51,7 +51,7 @@ export function SectionBanner({ id, label, flavor, photo }: SectionBannerProps) 
         </motion.h2>
         <motion.p
           key={`${id}-flavor`}
-          className="mt-1 text-sm text-creme/70"
+          className="mt-1 line-clamp-1 text-sm text-creme/80 sm:line-clamp-none"
           initial={{ y: reduce ? 0 : 10, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: dur * 0.5, ease: [0.22, 1, 0.36, 1], delay: dur * 0.14 }}

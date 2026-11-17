@@ -1,9 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
-import { Plus } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { Minus, Plus } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { useCart } from "@/lib/cart";
 import { cn } from "@/lib/utils";
 import type { PanCategory, PanItem } from "@/content/corporate-menu";
@@ -16,107 +15,130 @@ interface ItemRowProps {
   sectionLabel: string;
 }
 
+/**
+ * One dish, with one tappable "size pill" per price option.
+ * Name on top, options side by side underneath — everything fits a 320px
+ * phone without horizontal scroll. Tap a pill to add; once in the cart the
+ * pill turns into a − qty + stepper.
+ */
 export function ItemRow({ item, category, sectionId, sectionLabel }: ItemRowProps) {
-  const { addItem, items } = useCart();
-  const reduce = useReducedMotion();
+  const { items } = useCart();
 
-  const halfId = toItemId(sectionId, item.name, category.colA);
-  const fullId = item.b ? toItemId(sectionId, item.name, category.colB ?? "full") : null;
+  const options = [
+    {
+      id: toItemId(sectionId, item.name, category.colA),
+      label: category.colA,
+      price: parsePrice(item.a),
+    },
+    ...(item.b
+      ? [
+          {
+            id: toItemId(sectionId, item.name, category.colB ?? "full"),
+            label: category.colB ?? "Full",
+            price: parsePrice(item.b),
+          },
+        ]
+      : []),
+  ];
 
-  const halfQty = items.find((i) => i.id === halfId)?.quantity ?? 0;
-  const fullQty = fullId ? (items.find((i) => i.id === fullId)?.quantity ?? 0) : 0;
-
-  const halfPrice = parsePrice(item.a);
-  const fullPrice = item.b ? parsePrice(item.b) : 0;
-
-  const inCart = halfQty > 0 || fullQty > 0;
+  const inCart = options.some((o) => items.some((i) => i.id === o.id));
 
   return (
-    <motion.div
+    <div
       className={cn(
-        "rounded-[var(--radius-control)] border-l-2 bg-white px-4 py-3 shadow-sm transition-colors",
-        inCart ? "border-l-pinot" : "border-l-transparent",
+        "rounded-[var(--radius-control)] border bg-white p-3 shadow-sm transition-colors sm:p-4",
+        inCart ? "border-pinot/40" : "border-transparent",
       )}
-      animate={
-        reduce
-          ? undefined
-          : { borderLeftColor: inCart ? "#b01010" : "transparent" }
-      }
-      transition={{ duration: 0.25 }}
     >
-      <p className="mb-2 font-semibold leading-snug text-ink">{item.name}</p>
+      <p className="mb-2.5 font-semibold leading-snug text-ink">{item.name}</p>
 
-      <div className="flex flex-col gap-1.5">
-        {/* Option A */}
-        <div className="flex items-center gap-3">
-          <span className="min-w-0 flex-1 text-sm text-smoke">{category.colA}</span>
-          <span className="font-bold tabular-nums text-pinot">${halfPrice}</span>
-          {halfQty > 0 && (
-            <motion.span
-              key={halfQty}
-              className="text-xs font-bold text-pinot"
-              initial={reduce ? undefined : { y: -6, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.2 }}
-            >
-              ×{halfQty}
-            </motion.span>
-          )}
-          <Button
-            size="sm"
-            variant="primary"
-            className="shrink-0"
-            onClick={() =>
-              addItem({
-                id: halfId,
-                name: item.name,
-                label: category.colA,
-                unitPrice: halfPrice,
-                category: sectionLabel,
-              })
-            }
-          >
-            <Plus />
-            Add
-          </Button>
-        </div>
-
-        {/* Option B */}
-        {item.b && fullId && (
-          <div className="flex items-center gap-3">
-            <span className="min-w-0 flex-1 text-sm text-smoke">{category.colB}</span>
-            <span className="font-bold tabular-nums text-pinot">${fullPrice}</span>
-            {fullQty > 0 && (
-              <motion.span
-                key={fullQty}
-                className="text-xs font-bold text-pinot"
-                initial={reduce ? undefined : { y: -6, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.2 }}
-              >
-                ×{fullQty}
-              </motion.span>
-            )}
-            <Button
-              size="sm"
-              variant="outline"
-              className="shrink-0"
-              onClick={() =>
-                addItem({
-                  id: fullId,
-                  name: item.name,
-                  label: category.colB ?? "Full",
-                  unitPrice: fullPrice,
-                  category: sectionLabel,
-                })
-              }
-            >
-              <Plus />
-              Add
-            </Button>
-          </div>
-        )}
+      <div className={cn("grid gap-2", options.length > 1 ? "grid-cols-2" : "grid-cols-1")}>
+        {options.map((o) => (
+          <SizePill
+            key={o.id}
+            id={o.id}
+            name={item.name}
+            label={o.label}
+            price={o.price}
+            category={sectionLabel}
+          />
+        ))}
       </div>
-    </motion.div>
+    </div>
+  );
+}
+
+interface SizePillProps {
+  id: string;
+  name: string;
+  label: string;
+  price: number;
+  category: string;
+}
+
+function SizePill({ id, name, label, price, category }: SizePillProps) {
+  const { addItem, setQty, items } = useCart();
+  const reduce = useReducedMotion();
+  const qty = items.find((i) => i.id === id)?.quantity ?? 0;
+
+  const add = () => addItem({ id, name, label, unitPrice: price, category });
+
+  if (qty === 0) {
+    return (
+      <motion.button
+        type="button"
+        onClick={add}
+        whileTap={reduce ? undefined : { scale: 0.96 }}
+        aria-label={`Add ${name}, ${label}, $${price}`}
+        className="flex min-h-12 min-w-0 items-center justify-between gap-2 rounded-[var(--radius-control)] border border-line bg-linen px-3 py-2 text-left transition-colors hover:border-pinot active:bg-creme"
+      >
+        <span className="min-w-0">
+          <span className="block truncate text-xs text-smoke">{label}</span>
+          <span className="block font-bold tabular-nums text-pinot">${price}</span>
+        </span>
+        <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-pinot text-creme">
+          <Plus className="size-4" aria-hidden />
+        </span>
+      </motion.button>
+    );
+  }
+
+  return (
+    <div className="flex min-h-12 min-w-0 items-center justify-between gap-1 rounded-[var(--radius-control)] border border-pinot bg-pinot px-1.5 py-1.5 text-creme">
+      <button
+        type="button"
+        onClick={() => setQty(id, qty - 1)}
+        aria-label={`Remove one ${name}, ${label}`}
+        className="flex size-8 shrink-0 items-center justify-center rounded-full bg-creme/15 transition-colors hover:bg-creme/25"
+      >
+        <Minus className="size-4" aria-hidden />
+      </button>
+
+      <span className="min-w-0 text-center leading-tight">
+        <span className="block truncate text-[11px] text-creme/80">{label}</span>
+        <AnimatePresence mode="popLayout" initial={false}>
+          <motion.span
+            key={qty}
+            className="block text-lg font-bold tabular-nums"
+            initial={reduce ? undefined : { y: -8, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={reduce ? undefined : { y: 8, opacity: 0 }}
+            transition={{ duration: 0.18 }}
+            aria-live="polite"
+          >
+            {qty}
+          </motion.span>
+        </AnimatePresence>
+      </span>
+
+      <button
+        type="button"
+        onClick={add}
+        aria-label={`Add another ${name}, ${label}`}
+        className="flex size-8 shrink-0 items-center justify-center rounded-full bg-creme text-pinot transition-colors hover:bg-white"
+      >
+        <Plus className="size-4" aria-hidden />
+      </button>
+    </div>
   );
 }
